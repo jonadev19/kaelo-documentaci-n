@@ -1,7 +1,7 @@
 # 02 - Requirements
 
-**Version:** 1.1
-**Last Updated:** Enero 2026
+**Version:** 1.2
+**Last Updated:** Enero 28, 2026
 
 ## 4. ALCANCE DEL PROYECTO
 
@@ -20,9 +20,11 @@
 
 **Technical Capabilities:**
 - Real-time order status updates (WebSockets via Supabase Realtime)
-- Geospatial queries para route filtering (PostGIS)
+- Push notifications para order updates (Expo Notifications)
+- Geospatial queries para route filtering + user location tracking (PostGIS)
 - Progressive Web App (PWA) para merchant dashboard
 - Image optimization & CDN delivery (Supabase Storage)
+- Cash payment option (pay on pickup) + dual payment method support
 
 ### 4.2 Out of Scope (Phase 2+)
 
@@ -59,6 +61,12 @@
 | RF-006 | Pre-Order Placement | P0 | Product selection + ETA specification + payment | Payment gateway timeout (60s), inventory sold out during checkout, merchant offline |
 | RF-007 | Order History | P1 | Chronological list con status tracking | Pagination para >100 orders, cancelled orders display |
 | RF-008 | Route Sharing | P2 | Share via deeplink (social/messaging) | Recipient sin app installed (web fallback), expired share links |
+| RF-009 | Push Notifications | P0 | Receive order status updates (preparing, ready, cancelled) | App closed/background, notification permission denied, multiple devices per user |
+| RF-010 | User Location Tracking | P0 | Show current position on map during route navigation | GPS signal loss, battery optimization killing location service, permission revoked |
+| RF-011 | Route Search | P0 | Text search by route name or location | No results found, special characters handling, typo tolerance |
+| RF-012 | Order Cancellation | P0 | Cancel order before "preparing" status with refund | Cancellation after merchant started preparing, refund processing failures |
+| RF-013 | Favorite Routes | P1 | Save/unsave routes for quick access | Sync favorites across devices, deleted route handling |
+| RF-014 | Cash Payment Option | P1 | Select "Pay on Pickup" at checkout (no online payment) | Merchant refuses cash, no-show penalties |
 
 ### 6.2 Merchant Module (Web Dashboard)
 
@@ -69,6 +77,9 @@
 | RF-103 | Order Queue Management | P0 | Real-time order list con filtering/sorting | Simultaneous orders spike (>10 concurrent), missed order alerts |
 | RF-104 | Order Status Updates | P0 | State machine: pending → preparing → ready → completed → cancelled | State transition validation, customer notification failures |
 | RF-105 | Basic Analytics | P1 | Daily/weekly order volume, revenue charts | Insufficient data (<7 days), timezone handling |
+| RF-106 | Order Notifications | P0 | Browser/email alerts for new incoming orders | Multiple tabs open, notification spam (>5 orders/min) |
+| RF-107 | Payment Method Settings | P0 | Enable/disable cash payments, set online payment only | Changing settings while active orders pending |
+| RF-108 | Order Contact Info | P0 | View customer phone/name for order coordination | Privacy compliance (GDPR), masked contact info |
 
 ### 6.3 Admin Module
 
@@ -92,6 +103,10 @@
 | Compatibility | Mobile OS Support | Platform versions | Android 10+, iOS 14+ | Expo compatibility matrix |
 | Reliability | Crash Rate | App crashes | <1% sessions | Sentry crash reports |
 | Usability | Task Completion Time | First order placement | <3 min (90th percentile) | User analytics tracking |
+| Performance | Push Notification Delivery | Time to receive | <30s after status change | Expo push logs |
+| Accuracy | GPS Location Accuracy | Position precision | <20m error radius | Device GPS metrics |
+| Performance | Search Response Time | Query results | <1s for route search | Custom analytics |
+| Reliability | Notification Delivery Rate | Successful deliveries | >95% | Expo push receipts |
 
 ---
 

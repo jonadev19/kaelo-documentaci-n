@@ -13,34 +13,35 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
-## [1.2] - 2026-02-15 (EJEMPLO - No implementado aún)
+## [1.2] - 2026-01-28
 
 ### Added
-- Edge Case #4: Merchant offline scenarios during order placement
-- Payment retry strategy (exponential backoff con 3 intentos)
-- Webhook endpoint para Stripe payment confirmations
-- Database índice en `orders.created_at` para mejorar queries
+- **RF-009**: Push Notifications para order status updates (P0)
+- **RF-010**: User Location Tracking para navegación en tiempo real (P0)
+- **RF-011**: Route Search por nombre o ubicación (P0)
+- **RF-012**: Order Cancellation con refund antes de "preparing" (P0)
+- **RF-013**: Favorite Routes para acceso rápido (P1)
+- **RF-014**: Cash Payment Option - pago en punto de recogida (P1)
+- **RF-106**: Order Notifications para comerciantes (P0)
+- **RF-107**: Payment Method Settings para comerciantes (P0)
+- **RF-108**: Order Contact Info para coordinación (P0)
+- **Requisitos No Funcionales**:
+  - Push notification delivery: <30s
+  - GPS accuracy: <20m error radius
+  - Search response: <1s
+  - Notification delivery rate: >95%
 
 ### Changed
-- API latency target: <500ms → <300ms (P95)
-- Database connection pool: 20 → 25 connections
-- Mapbox tile cache duration: 7 days → 14 days
-- Order timeout period: 30 min → 45 min
+- Updated MVP Scope para incluir notificaciones push y geolocalización
+- Expanded technical capabilities con Expo Notifications
+- Updated document version: 1.1 → 1.2
 
-### Fixed
-- Typo en RF-006 acceptance criteria ("payment" → "payment processing")
-- Broken link en 03-architecture.md referencing deployment
-- Incorrect SQL syntax en `reserve_stock_atomic` function
-
-### Deprecated
-- Wearable integration moved from Phase 1 to Phase 2
-- Review/Rating system postponed to post-launch
-
-### Removed
-- N/A
-
-### Security
-- Added rate limiting to authentication endpoints (5 attempts/hour)
+### Justification
+- Timeline ajustado a 6 semanas requiere priorización crítica
+- Notificaciones son esenciales para flujo de órdenes
+- Geolocalización es core feature para app de cicloturismo
+- Búsqueda mejora usabilidad significativamente
+- Opción de efectivo amplía accesibilidad (no todos tienen tarjeta)
 
 ---
 
